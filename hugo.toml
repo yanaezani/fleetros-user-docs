@@ -1,0 +1,8 @@
+baseURL = 'https://yanaezani.github.io/fleetros-user-docs/'
+languageCode = 'en-us'
+title = 'Fleetros User Documentation'
+theme = 'docsy'
+
+[params]
+  github_repo = 'https://github.com/yanaezani/fleetros-user-docs'
+  
