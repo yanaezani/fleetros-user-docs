@@ -1,0 +1,340 @@
+/* ==========================================================================
+   Fleetros brand theme
+   ========================================================================== */
+
+:root {
+  --brand-blue: #0c5a8a;
+  --brand-blue-light: #1580bf;
+  --brand-dark: #0f172a;
+  --brand-light: #f0f7fc;
+  --brand-border: #e2e8f0;
+  --brand-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.06);
+  --brand-shadow-hover: 0 4px 8px rgba(15, 23, 42, 0.08), 0 12px 24px rgba(15, 23, 42, 0.1);
+  --brand-radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand-blue: #4fb3e8;
+    --brand-blue-light: #7cc9f0;
+    --brand-dark: #e2e8f0;
+    --brand-light: #16232f;
+    --brand-border: #2a3b4d;
+    --brand-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
+    --brand-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.35), 0 12px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ---- Base typography ------------------------------------------------- */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.markdown {
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.markdown h1 {
+  font-size: 2rem;
+  letter-spacing: -0.01em;
+}
+
+.markdown h2 {
+  font-size: 1.5rem;
+  margin-top: 2.5em;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Sidebar ----------------------------------------------------------- */
+
+.book-menu nav {
+  background: var(--brand-light);
+  border-right: 1px solid var(--brand-border);
+}
+
+.book-menu a {
+  border-radius: 6px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.book-menu a:hover {
+  background: rgba(12, 90, 138, 0.08);
+}
+
+.book-menu a.active {
+  color: var(--brand-blue) !important;
+  font-weight: 600;
+  background: rgba(12, 90, 138, 0.1);
+}
+
+/* Header links */
+.markdown h1,
+.markdown h2 {
+  color: var(--brand-blue);
+  border-bottom: 2px solid var(--brand-border);
+  padding-bottom: 0.3em;
+}
+
+.markdown h3 {
+  color: var(--brand-dark);
+}
+
+/* Links */
+.markdown a {
+  color: var(--brand-blue);
+  text-decoration-color: rgba(12, 90, 138, 0.35);
+}
+
+.markdown a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* Tables */
+.markdown table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--brand-shadow);
+}
+
+.markdown table th {
+  background: var(--brand-blue);
+  color: white;
+  font-weight: 600;
+}
+
+.markdown table td {
+  border-color: var(--brand-border);
+}
+
+.markdown table tr:hover {
+  background: var(--brand-light);
+}
+
+/* Blockquotes as tip boxes */
+.markdown blockquote {
+  border-left: 4px solid var(--brand-blue);
+  background: var(--brand-light);
+  padding: 0.8em 1em;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Logo area */
+.book-brand {
+  font-weight: 700;
+  color: var(--brand-blue) !important;
+  font-size: 1.2em;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better code blocks */
+.markdown code {
+  background: var(--brand-light);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.markdown pre {
+  border-radius: var(--brand-radius);
+  border: 1px solid var(--brand-border);
+  box-shadow: var(--brand-shadow);
+}
+
+.markdown pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Search input styling */
+.book-search input {
+  border: 2px solid var(--brand-border);
+  border-radius: 8px;
+  background: var(--body-background);
+}
+
+.book-search input:focus {
+  border-color: var(--brand-blue);
+  outline: none;
+}
+
+/* {{< button >}} shortcode */
+.book-btn {
+  display: inline-block;
+  padding: 0.5em 1.1em;
+  border-radius: 999px;
+  background: var(--brand-blue);
+  color: white !important;
+  text-decoration: none !important;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.book-btn:hover {
+  box-shadow: var(--brand-shadow-hover);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Homepage hero + card grid
+   ========================================================================== */
+
+.fr-hero {
+  padding: 2.5rem 0 2rem;
+  border-bottom: 1px solid var(--brand-border);
+  margin-bottom: 2.5rem;
+}
+
+.fr-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--brand-blue);
+  margin: 0 0 0.75rem;
+}
+
+.fr-hero h1 {
+  font-size: 2.4rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem;
+  color: var(--brand-dark);
+  border: none;
+  padding: 0;
+}
+
+.fr-hero-sub {
+  font-size: 1.1rem;
+  max-width: 42rem;
+  color: var(--body-font-color);
+  opacity: 0.75;
+  margin: 0 0 1.75rem;
+  line-height: 1.6;
+}
+
+.fr-hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+}
+
+.fr-btn {
+  display: inline-block;
+  padding: 0.65em 1.4em;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.fr-btn-primary {
+  background: var(--brand-blue);
+  color: white !important;
+}
+
+.fr-btn-primary:hover {
+  background: var(--brand-blue-light);
+  box-shadow: var(--brand-shadow-hover);
+  transform: translateY(-1px);
+}
+
+.fr-btn-ghost {
+  background: transparent;
+  color: var(--brand-blue) !important;
+  border: 1.5px solid var(--brand-border);
+}
+
+.fr-btn-ghost:hover {
+  border-color: var(--brand-blue);
+  transform: translateY(-1px);
+}
+
+.fr-hero-links {
+  display: flex;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+
+.fr-hero-links a {
+  color: var(--body-font-color) !important;
+  text-decoration: none !important;
+  opacity: 0.8;
+}
+
+.fr-hero-links a:hover {
+  opacity: 1;
+  color: var(--brand-blue) !important;
+}
+
+.fr-hero-links strong {
+  display: block;
+  color: var(--brand-blue);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.15rem;
+}
+
+.fr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.fr-card {
+  display: block;
+  padding: 1.5rem;
+  border-radius: var(--brand-radius);
+  border: 1px solid var(--brand-border);
+  background: var(--body-background);
+  text-decoration: none !important;
+  color: inherit !important;
+  box-shadow: var(--brand-shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.fr-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--brand-shadow-hover);
+  border-color: var(--brand-blue);
+}
+
+.fr-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  background: var(--brand-light);
+  color: var(--brand-blue);
+  margin-bottom: 1rem;
+}
+
+.fr-card-icon svg {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.fr-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  color: var(--brand-dark);
+}
+
+.fr-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.75;
+  line-height: 1.5;
+}
