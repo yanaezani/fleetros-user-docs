@@ -1,5 +1,5 @@
 baseURL = 'https://yanaezani.github.io/fleetros-user-docs/'
-title = 'Fleetros User Documentation'
+title = 'Fleetros Docs'
 
 [module]
   [[module.imports]]
@@ -10,6 +10,7 @@ title = 'Fleetros User Documentation'
   BookToC = true
   BookSection = 'docs'
   BookSearch = true
+  BookBrand = 'FLEETROS'
 
 [markup]
   [markup.goldmark]

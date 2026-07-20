@@ -1,0 +1,87 @@
+/* Fleetros Brand Colors */
+:root {
+  --brand-blue: #0C5A8A;
+  --brand-dark: #0F172A;
+  --brand-light: #F0F7FC;
+}
+
+/* Sidebar styling */
+.book-menu nav {
+  background: var(--brand-light);
+  border-right: 3px solid var(--brand-blue);
+}
+
+.book-menu a.active {
+  color: var(--brand-blue) !important;
+  font-weight: 600;
+}
+
+/* Header links */
+.markdown h1, .markdown h2 {
+  color: var(--brand-blue);
+  border-bottom: 2px solid var(--brand-light);
+  padding-bottom: 0.3em;
+}
+
+.markdown h3 {
+  color: var(--brand-dark);
+}
+
+/* Links */
+.markdown a {
+  color: var(--brand-blue);
+}
+
+/* Tables */
+.markdown table th {
+  background: var(--brand-blue);
+  color: white;
+  font-weight: 600;
+}
+
+.markdown table td {
+  border-color: #E2E8F0;
+}
+
+.markdown table tr:hover {
+  background: var(--brand-light);
+}
+
+/* Blockquotes as tip boxes */
+.markdown blockquote {
+  border-left: 4px solid var(--brand-blue);
+  background: var(--brand-light);
+  padding: 0.8em 1em;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Logo area */
+.book-brand {
+  font-weight: 700;
+  color: var(--brand-blue) !important;
+  font-size: 1.2em;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better code blocks */
+.markdown code {
+  background: var(--brand-light);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* Search input styling */
+.book-search input {
+  border: 2px solid #E2E8F0;
+  border-radius: 8px;
+}
+
+.book-search input:focus {
+  border-color: var(--brand-blue);
+  outline: none;
+}
