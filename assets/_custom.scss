@@ -1,147 +1,343 @@
 /* ==========================================================================
    Fleetros brand theme
+   Built on top of hugo-book. Has full access to the theme's Sass tokens
+   ($padding-*, var(--gray-*), var(--color-link), var(--color-accent-*),
+   the accent()/fixed()/spin() mixins, etc.) since this file is @import-ed
+   into the same book.scss compilation.
    ========================================================================== */
+
+@import "plugins/scrollbars";
 
 :root {
   --brand-blue: #0c5a8a;
   --brand-blue-light: #1580bf;
+  --brand-blue-rgb: 12, 90, 138;
   --brand-dark: #0f172a;
   --brand-light: #f0f7fc;
   --brand-border: #e2e8f0;
+
+  --brand-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
   --brand-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.06);
   --brand-shadow-hover: 0 4px 8px rgba(15, 23, 42, 0.08), 0 12px 24px rgba(15, 23, 42, 0.1);
+
+  --brand-radius-sm: 6px;
   --brand-radius: 10px;
+  --brand-radius-lg: 16px;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --brand-blue: #4fb3e8;
     --brand-blue-light: #7cc9f0;
+    --brand-blue-rgb: 79, 179, 232;
     --brand-dark: #e2e8f0;
     --brand-light: #16232f;
     --brand-border: #2a3b4d;
+
+    --brand-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
     --brand-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
     --brand-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.35), 0 12px 24px rgba(0, 0, 0, 0.4);
   }
 }
 
-/* ---- Base typography ------------------------------------------------- */
+/* ---- Base -------------------------------------------------------------- */
+
+html {
+  scrollbar-gutter: stable;
+}
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.006em;
 }
+
+::selection {
+  background: rgba(var(--brand-blue-rgb), 0.25);
+}
+
+:focus-visible {
+  outline-color: var(--brand-blue);
+  border-radius: 2px;
+}
+
+/* ---- Typography ---------------------------------------------------------- */
 
 .markdown {
-  line-height: 1.7;
+  line-height: 1.75;
   font-size: 1rem;
+
+  h1, h2, h3, h4 {
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    scroll-margin-top: $padding-16;
+  }
+
+  h1 {
+    font-size: 2.125rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 2.75em;
+    padding-top: $padding-16;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    margin-top: 2em;
+    color: var(--brand-dark);
+  }
+
+  h4 {
+    font-size: 1.02rem;
+    color: var(--brand-dark);
+  }
+
+  h1 + p,
+  h2 + p,
+  h3 + p {
+    margin-top: $padding-8;
+  }
+
+  p {
+    max-width: 72ch;
+  }
+
+  ul, ol {
+    li {
+      margin: 0.35em 0;
+    }
+
+    li::marker {
+      color: var(--brand-blue);
+    }
+  }
+
+  strong {
+    font-weight: 650;
+  }
+
+  hr {
+    margin: 2.5em 0;
+    background: var(--brand-border);
+  }
 }
 
+/* Section headers get the brand treatment; h1 stays clean like a page title */
 .markdown h1 {
-  font-size: 2rem;
-  letter-spacing: -0.01em;
+  color: var(--brand-dark);
+  border: none;
+  padding: 0;
 }
 
-.markdown h2 {
-  font-size: 1.5rem;
-  margin-top: 2.5em;
-  letter-spacing: -0.01em;
-}
-
-/* ---- Sidebar ----------------------------------------------------------- */
-
-.book-menu nav {
-  background: var(--brand-light);
-  border-right: 1px solid var(--brand-border);
-}
-
-.book-menu a {
-  border-radius: 6px;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.book-menu a:hover {
-  background: rgba(12, 90, 138, 0.08);
-}
-
-.book-menu a.active {
-  color: var(--brand-blue) !important;
-  font-weight: 600;
-  background: rgba(12, 90, 138, 0.1);
-}
-
-/* Header links */
-.markdown h1,
 .markdown h2 {
   color: var(--brand-blue);
-  border-bottom: 2px solid var(--brand-border);
-  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--brand-border);
+  padding-bottom: 0.4em;
 }
 
 .markdown h3 {
   color: var(--brand-dark);
 }
 
-/* Links */
+/* Anchor links revealed on hover, tinted to match the heading */
+.markdown h2 a.anchor,
+.markdown h3 a.anchor,
+.markdown h4 a.anchor {
+  color: var(--brand-blue);
+}
+
+/* ---- Links --------------------------------------------------------------- */
+
 .markdown a {
   color: var(--brand-blue);
-  text-decoration-color: rgba(12, 90, 138, 0.35);
+  text-decoration-color: rgba(var(--brand-blue-rgb), 0.35);
+  text-underline-offset: 0.15em;
+  transition: text-decoration-color 0.15s ease;
 }
 
 .markdown a:hover {
   text-decoration-color: currentColor;
 }
 
-/* Tables */
-.markdown table {
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: var(--brand-shadow);
-}
+/* ---- Sidebar ------------------------------------------------------------- */
 
-.markdown table th {
-  background: var(--brand-blue);
-  color: white;
-  font-weight: 600;
-}
+.book-menu {
+  .book-menu-content {
+    padding: $padding-16 $padding-8 $padding-16 $padding-16;
+    background: var(--brand-light);
+    border-right: 1px solid var(--brand-border);
+  }
 
-.markdown table td {
-  border-color: var(--brand-border);
-}
+  nav > ul {
+    padding-inline-end: $padding-8;
+  }
 
-.markdown table tr:hover {
-  background: var(--brand-light);
-}
+  nav ul ul {
+    border-inline-start: 1px solid var(--brand-border);
+    padding-inline-start: $padding-16 * 0.85;
+    margin-inline-start: $padding-4;
+  }
 
-/* Blockquotes as tip boxes */
-.markdown blockquote {
-  border-left: 4px solid var(--brand-blue);
-  background: var(--brand-light);
-  padding: 0.8em 1em;
-  border-radius: 0 8px 8px 0;
+  a, label > a {
+    border-radius: var(--brand-radius-sm);
+    padding: 0.45em 0.65em;
+    margin: 1px 0;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  a[href]:hover, a[role=button]:hover {
+    opacity: 1;
+    background: rgba(var(--brand-blue-rgb), 0.08);
+  }
+
+  a.active {
+    color: var(--brand-blue) !important;
+    font-weight: 600;
+    background: rgba(var(--brand-blue-rgb), 0.12);
+  }
+
+  .book-section-flat > a,
+  .book-section-flat > span,
+  .book-section-flat > label > a {
+    font-weight: 700;
+    font-size: var(--font-size-smallest);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    opacity: 0.6;
+    padding-inline-start: 0.65em;
+  }
 }
 
 /* Logo area */
 .book-brand {
   font-weight: 700;
   color: var(--brand-blue) !important;
-  font-size: 1.2em;
+  font-size: 1.15em;
+  letter-spacing: -0.01em;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Search input */
+.book-search input {
+  border: 1.5px solid var(--brand-border);
+  border-radius: var(--brand-radius-sm);
+  background: var(--body-background);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Better code blocks */
-.markdown code {
+.book-search input:focus {
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 3px rgba(var(--brand-blue-rgb), 0.15);
+  outline: none;
+}
+
+/* ---- Table of contents ----------------------------------------------------- */
+
+.book-toc {
+  nav > ul {
+    border-inline-start: 1px solid var(--brand-border);
+  }
+
+  nav ul a {
+    padding: 0.3em 0 0.3em $padding-8;
+    margin-inline-start: -1px;
+    border-inline-start: 2px solid transparent;
+    opacity: 0.65;
+    transition: opacity 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  nav ul a:hover {
+    opacity: 1;
+    color: var(--brand-blue);
+  }
+}
+
+/* ---- Tables ---------------------------------------------------------------- */
+
+.markdown table {
+  border-radius: var(--brand-radius-sm);
+  overflow: hidden;
+  box-shadow: var(--brand-shadow);
+  border: 1px solid var(--brand-border);
+}
+
+.markdown table th {
+  background: var(--brand-blue);
+  color: white;
+  font-weight: 600;
+  border-color: var(--brand-blue);
+}
+
+.markdown table td {
+  border-color: var(--brand-border);
+}
+
+.markdown table tr:nth-child(2n) {
+  background: rgba(var(--brand-blue-rgb), 0.03);
+}
+
+.markdown table tr:hover {
   background: var(--brand-light);
+}
+
+/* ---- Blockquotes as tip boxes ----------------------------------------------- */
+
+.markdown blockquote {
+  border-inline-start: 4px solid var(--brand-blue);
+  background: var(--brand-light);
+  padding: 0.9em 1.1em;
+  border-radius: 0 var(--brand-radius-sm) var(--brand-radius-sm) 0;
+}
+
+/* ---- Alert-style callouts ({{< hint >}} / "> [!NOTE]" markdown alerts) ----- */
+
+.markdown .book-hint {
+  position: relative;
+  padding: 1em 1.15em 1em 3em;
+  border-radius: var(--brand-radius-sm);
+  border-inline-start-width: 4px;
+  box-shadow: var(--brand-shadow-sm);
+
+  &::before {
+    position: absolute;
+    left: 1.1em;
+    top: 1em;
+    font-weight: 700;
+    font-size: 0.7rem;
+    line-height: 1.3rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    text-align: center;
+    border-radius: 50%;
+    color: white;
+  }
+
+  @each $name, $glyph in (note: "i", tip: "!", important: "★", warning: "!", caution: "×", default: "i") {
+    &.#{$name}::before {
+      content: "#{$glyph}";
+      background: var(--color-accent-#{$name});
+    }
+  }
+}
+
+/* ---- Code -------------------------------------------------------------------- */
+
+.markdown code {
+  font-family: var(--font-mono);
+  background: var(--brand-light);
+  border-color: var(--brand-border);
   padding: 0.2em 0.4em;
   border-radius: 4px;
-  font-size: 0.9em;
+  font-size: 0.88em;
 }
 
 .markdown pre {
+  font-family: var(--font-mono);
   border-radius: var(--brand-radius);
   border: 1px solid var(--brand-border);
   box-shadow: var(--brand-shadow);
@@ -152,33 +348,67 @@ html {
   padding: 0;
 }
 
-/* Search input styling */
-.book-search input {
-  border: 2px solid var(--brand-border);
-  border-radius: 8px;
-  background: var(--body-background);
+.markdown .book-codeblock-filename {
+  border-radius: var(--brand-radius) var(--brand-radius) 0 0;
+  border-color: var(--brand-border);
+  font-family: var(--font-mono);
 }
 
-.book-search input:focus {
-  border-color: var(--brand-blue);
-  outline: none;
-}
+/* ---- Buttons ({{< button >}} shortcode) --------------------------------------- */
 
-/* {{< button >}} shortcode */
-.book-btn {
-  display: inline-block;
-  padding: 0.5em 1.1em;
+.markdown a.book-btn[href] {
   border-radius: 999px;
-  background: var(--brand-blue);
-  color: white !important;
-  text-decoration: none !important;
+  border-color: var(--brand-blue);
+  color: var(--brand-blue);
   font-weight: 600;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.book-btn:hover {
-  box-shadow: var(--brand-shadow-hover);
-  transform: translateY(-1px);
+.markdown a.book-btn[href]:hover {
+  background: var(--brand-blue);
+  color: white;
+  text-decoration: none;
+}
+
+/* ---- Badges ({{< badge >}} shortcode) ------------------------------------------ */
+
+.markdown .book-badge {
+  border-radius: 999px;
+  font-weight: 600;
+
+  span {
+    padding: 0.15em $padding-8;
+  }
+}
+
+/* ---- Steps ({{< steps >}} shortcode) ------------------------------------------- */
+
+.markdown .book-steps > ol > li::before {
+  background: var(--brand-blue);
+  color: white;
+  font-weight: 700;
+}
+
+/* ---- Cards ({{< card >}} shortcode) --------------------------------------------- */
+
+.markdown .book-card {
+  border-radius: var(--brand-radius);
+  border-color: var(--brand-border);
+  box-shadow: var(--brand-shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--brand-shadow-hover);
+    border-color: var(--brand-blue);
+  }
+}
+
+/* ---- Footer -------------------------------------------------------------------- */
+
+.book-footer {
+  border-top: 1px solid var(--brand-border);
+  opacity: 0.85;
 }
 
 /* ==========================================================================
@@ -186,7 +416,7 @@ html {
    ========================================================================== */
 
 .fr-hero {
-  padding: 2.5rem 0 2rem;
+  padding: 3rem 0 2.25rem;
   border-bottom: 1px solid var(--brand-border);
   margin-bottom: 2.5rem;
 }
@@ -201,43 +431,46 @@ html {
 }
 
 .fr-hero h1 {
-  font-size: 2.4rem;
-  line-height: 1.2;
+  font-size: 2.6rem;
+  line-height: 1.15;
   letter-spacing: -0.02em;
-  margin: 0 0 0.75rem;
+  font-weight: 700;
+  margin: 0 0 0.85rem;
   color: var(--brand-dark);
   border: none;
   padding: 0;
 }
 
 .fr-hero-sub {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   max-width: 42rem;
   color: var(--body-font-color);
-  opacity: 0.75;
-  margin: 0 0 1.75rem;
-  line-height: 1.6;
+  opacity: 0.72;
+  margin: 0 0 1.85rem;
+  line-height: 1.65;
 }
 
 .fr-hero-actions {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.85rem;
 }
 
 .fr-btn {
   display: inline-block;
-  padding: 0.65em 1.4em;
+  padding: 0.7em 1.5em;
   border-radius: 999px;
   font-weight: 600;
+  font-size: 0.95rem;
   text-decoration: none !important;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 
 .fr-btn-primary {
   background: var(--brand-blue);
   color: white !important;
+  box-shadow: var(--brand-shadow-sm);
 }
 
 .fr-btn-primary:hover {
@@ -254,6 +487,7 @@ html {
 
 .fr-btn-ghost:hover {
   border-color: var(--brand-blue);
+  background: rgba(var(--brand-blue-rgb), 0.06);
   transform: translateY(-1px);
 }
 
@@ -268,6 +502,7 @@ html {
   color: var(--body-font-color) !important;
   text-decoration: none !important;
   opacity: 0.8;
+  transition: opacity 0.15s ease, color 0.15s ease;
 }
 
 .fr-hero-links a:hover {
@@ -293,8 +528,8 @@ html {
 
 .fr-card {
   display: block;
-  padding: 1.5rem;
-  border-radius: var(--brand-radius);
+  padding: 1.6rem;
+  border-radius: var(--brand-radius-lg);
   border: 1px solid var(--brand-border);
   background: var(--body-background);
   text-decoration: none !important;
@@ -315,10 +550,16 @@ html {
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 8px;
+  border-radius: var(--brand-radius-sm);
   background: var(--brand-light);
   color: var(--brand-blue);
   margin-bottom: 1rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.fr-card:hover .fr-card-icon {
+  background: var(--brand-blue);
+  color: white;
 }
 
 .fr-card-icon svg {
@@ -328,13 +569,20 @@ html {
 
 .fr-card h3 {
   margin: 0 0 0.4rem;
-  font-size: 1.05rem;
+  font-size: 1.08rem;
+  font-weight: 700;
   color: var(--brand-dark);
 }
 
 .fr-card p {
   margin: 0;
-  font-size: 0.9rem;
-  opacity: 0.75;
-  line-height: 1.5;
+  font-size: 0.92rem;
+  opacity: 0.72;
+  line-height: 1.55;
+}
+
+@media screen and (max-width: 480px) {
+  .fr-hero h1 {
+    font-size: 2rem;
+  }
 }
