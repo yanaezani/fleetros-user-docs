@@ -13,7 +13,6 @@ type: docs
   </div>
   <div class="fr-hero-links">
     <a href="https://app.fleetros.com" target="_blank" rel="noopener"><strong>Application</strong> app.fleetros.com</a>
-    <a href="https://keycloak.fleetros.com" target="_blank" rel="noopener"><strong>Login</strong> keycloak.fleetros.com</a>
     <a href="https://portal.fleetros.com" target="_blank" rel="noopener"><strong>Customer Portal</strong> portal.fleetros.com</a>
   </div>
 </div>
