@@ -1,54 +1,17 @@
 baseURL = 'https://yanaezani.github.io/fleetros-user-docs/'
-languageCode = 'en-us'
 title = 'Fleetros User Documentation'
 
 [module]
-  [module.hugoVersion]
-    extended = true
-    min = "0.110.0"
   [[module.imports]]
-    path = "github.com/google/docsy"
-  [[module.imports]]
-    path = "github.com/google/docsy/dependencies"
+    path = "github.com/alex-shpak/hugo-book"
 
 [params]
-  github_repo = 'https://github.com/yanaezani/fleetros-user-docs'
-  github_branch = 'main'
-  offlineSearch = true
-  prism_syntax_highlighting = false
-
-  [params.ui]
-    sidebar_menu_compact = true
-    sidebar_menu_foldable = true
-    breadcrumb_disable = false
-    navbar_logo = false
-
-  [params.links]
-    [[params.links.user]]
-      name = "Fleetros App"
-      url = "https://app.fleetros.com"
-      icon = "fas fa-external-link-alt"
-      desc = "Go to Fleetros Backoffice"
-    [[params.links.user]]
-      name = "Customer Portal"
-      url = "https://portal.fleetros.com"
-      icon = "fas fa-users"
-      desc = "Go to Customer Portal"
-
-[menu]
-  [[menu.main]]
-    name = "Documentation"
-    weight = 10
-    url = "/docs/"
-  [[menu.main]]
-    name = "Fleetros App"
-    weight = 90
-    url = "https://app.fleetros.com"
-    pre = "<i class='fas fa-external-link-alt'></i>"
+  BookTheme = 'auto'
+  BookToC = true
+  BookSection = 'docs'
+  BookSearch = true
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-  [markup.highlight]
-    style = "tango"
