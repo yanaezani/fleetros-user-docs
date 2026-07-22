@@ -44,3 +44,70 @@ Shows a complete audit trail of status changes and payment adjustments, includin
 At the top of the booking detail page you can also click Record Payment, Print Receipt, Modify Booking, or Delete.
 
 > **Tip:** Use the Modify Booking feature to change dates, vehicles, or offerings on an existing reservation. The system will show a cost preview before you confirm any changes.
+
+## Pricing Calculation Examples
+
+Every booking total follows the same structure:
+
+1. The **vehicle rate** (multiplied by the number of days or hours) is added to any selected offerings to form the **Subtotal**.
+2. Any **discounts** are subtracted from the Subtotal.
+3. **Tax (10%)** is calculated on the discounted amount, and a **Service Fee (5%)** is calculated on the original Subtotal.
+4. The sum of these gives the **Grand Total**. A refundable **Deposit** is shown as the amount **Due at Booking**, with the remainder **Due at Pickup**.
+
+---
+
+### Example A — Daily Rate Only
+
+> A vehicle is set with a Daily rate of RM 120.00. The customer books it for 2 days and adds a GPS offering at RM 50.00.
+
+| Line Item | Calculation | Amount |
+|---|---|---|
+| Vehicle rental | 2 days × RM 120.00 | RM 240.00 |
+| GPS offering | — | RM 50.00 |
+| **Subtotal** | | **RM 290.00** |
+| Tax (10%) | 10% × RM 290.00 | RM 29.00 |
+| Service Fee (5%) | 5% × RM 290.00 | RM 14.50 |
+| **Grand Total** | | **RM 333.50** |
+| Due at Booking (deposit) | | RM 66.70 |
+| Due at Pickup (balance) | | RM 266.80 |
+
+---
+
+### Example B — Daily Rate with Discounts
+
+> A vehicle is set with a Daily rate of RM 180.00 and booked for 3 days. Two discounts are applied: SAVE10 (10% off) and SAVE20 (fixed RM 20.00 off). Discounts are subtracted before Tax is calculated, while the Service Fee is based on the original Subtotal.
+
+| Line Item | Calculation | Amount |
+|---|---|---|
+| Vehicle rental | 3 days × RM 180.00 | RM 540.00 |
+| **Subtotal** | | **RM 540.00** |
+| Discount — SAVE10 (10%) | 10% × RM 540.00 | −RM 54.00 |
+| Discount — SAVE20 (fixed) | — | −RM 20.00 |
+| **Discounted amount** | | **RM 466.00** |
+| Tax (10%) | 10% × RM 466.00 | RM 46.60 |
+| Service Fee (5%) | 5% × RM 540.00 | RM 27.00 |
+| **Grand Total** | | **RM 539.60** |
+
+---
+
+### Example C — Daily + Hourly Rate Combined
+
+> A vehicle is set with a Daily rate of RM 250.00 and an Hourly rate of RM 10.15. The customer books it for 30 hours. When both rates exist, the system charges full days at the daily rate and bills only the leftover hours at the hourly rate.
+
+| Line Item | Calculation | Amount |
+|---|---|---|
+| Vehicle rental (full day) | 1 day × RM 250.00 | RM 250.00 |
+| Vehicle rental (extra hours) | 6 hours × RM 10.15 | RM 60.90 |
+| **Subtotal** | | **RM 310.90** |
+| Tax (10%) | 10% × RM 310.90 | RM 31.09 |
+| Service Fee (5%) | 5% × RM 310.90 | RM 15.55 |
+| **Grand Total** | | **RM 357.54** |
+
+---
+
+### How Single Rate Types Are Handled
+
+| Scenario | Behaviour |
+|---|---|
+| **Daily rate only** | Any partial day is rounded up to a full day. For example, a 9-hour booking on a vehicle priced at RM 120.00/day is billed as 1 full day (RM 120.00), because there is no hourly rate. |
+| **Hourly rate only** | The booking is billed purely by the number of hours. If the duration is shorter than the vehicle's Minimum Rental Hours setting, the minimum number of hours is charged. |
